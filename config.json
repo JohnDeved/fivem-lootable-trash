@@ -1,0 +1,37 @@
+{
+  "trashObjects": [  
+    { "name": "prop_bin_01a", "type": 1 },
+    { "name": "prop_bin_02a", "type": 1 },
+    { "name": "prop_bin_03a", "type": 1 },
+    { "name": "prop_bin_04a", "type": 1 },
+    { "name": "prop_bin_05a", "type": 1 },
+    { "name": "prop_bin_06a", "type": 1 },
+    { "name": "prop_bin_07a", "type": 1 },
+    { "name": "prop_bin_07b", "type": 1 },
+    { "name": "prop_bin_07c", "type": 1 },
+    { "name": "prop_bin_07d", "type": 1 },
+    { "name": "prop_bin_08a", "type": 1 },
+    { "name": "prop_bin_08open", "type": 1 },
+    { "name": "prop_bin_09a", "type": 1 },
+    { "name": "prop_bin_10a", "type": 1 },
+    { "name": "prop_bin_10b", "type": 1 },
+    { "name": "prop_bin_11a", "type": 1 },
+    { "name": "prop_bin_11b", "type": 1 },
+    { "name": "prop_bin_12a", "type": 1 },
+    { "name": "prop_bin_13a", "type": 1 },
+    { "name": "prop_bin_14a", "type": 1 },
+    { "name": "prop_bin_14b", "type": 1 },
+    { "name": "prop_bin_beach_01a", "type": 1 },
+    { "name": "prop_bin_delpiero", "type": 1 },
+    { "name": "prop_bin_delpiero_b", "type": 1 },
+  
+    { "name": "prop_dumpster_01a", "type": 2 },
+    { "name": "prop_dumpster_02b", "type": 2 },
+    { "name": "prop_dumpster_3a", "type": 2 },
+    { "name": "prop_dumpster_4a", "type": 2 },
+    { "name": "prop_dumpster_4b", "type": 2 },
+    { "name": "prop_dumpster_02a", "type": 2 },
+    { "name": "prop_recyclebin_04_a", "type": 2 },
+    { "name": "prop_recyclebin_04_b", "type": 2 }
+  ]
+}
