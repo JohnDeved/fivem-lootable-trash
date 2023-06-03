@@ -38,7 +38,7 @@
 
   // client/client.ts
   console.log("[lootable-trash] Client Resource Started");
-  var activeObject = void 0;
+  var activeObject;
   var isSeachingTrash = false;
   var searchedObjects = [];
   function getNearestTrashObject() {
@@ -130,7 +130,7 @@
       return;
     }
     SetNotificationTextEntry("STRING");
-    AddTextComponentString("Du hast ~g~" + result + "~s~ gefunden.");
+    AddTextComponentString(`Du hast ~g~${result}~s~ gefunden.`);
     DrawNotification(true, false);
   });
 })();

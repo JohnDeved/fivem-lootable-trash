@@ -15,5 +15,5 @@ onNet("lootable-trash:searchTrash", (source, obj) => {
     return;
   }
   searchedObjects.push(obj.pos);
-  emitNet("lootable-trash:searchTrashResult", source, "result_" + count);
+  emitNet("lootable-trash:searchTrashResult", source, `result_${count}`);
 });
