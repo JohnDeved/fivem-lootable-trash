@@ -36,6 +36,16 @@
     { "name": "prop_recyclebin_04_b", "type": 2 }
   ],
 
+  "lootLocation": [
+    {
+      "pos": [],
+      "range": 100,
+      "loot": [
+        { "weight": 100, "amount": [1, 1], "types": [2], "name": "weapon_dagger" }
+      ]
+    }
+  ],
+
   "loot": [
     { "weight": 1, "amount": [1, 1], "types": [2], "name": "weapon_dagger" },
     { "weight": 1, "amount": [1, 1], "types": [2], "name": "weapon_crowbar" },    
