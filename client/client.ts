@@ -1,5 +1,6 @@
 import { trashObjects } from '../config.json'
 import type { IRandomLoot } from '../server/random'
+import { ESX } from 'shared/exports/esx'
 
 export type TrashObject = NonNullable<ReturnType<typeof getNearestTrashObject>>
 
@@ -46,6 +47,10 @@ async function searchTrash (obj: TrashObject) {
   const [x, y] = GetEntityCoords(PlayerPedId(), true)
   const heading = GetHeadingFromVector_2d(obj.pos[0] - x, obj.pos[1] - y)
   SetEntityHeading(PlayerPedId(), heading)
+
+  try {
+    globalThis.exports.progressBars.startUI(5000, 'Müll wird durchsucht...')
+  } catch (e) {}
 
   TaskStartScenarioInPlace(PlayerPedId(), 'PROP_HUMAN_BUM_BIN', 0, true)
   // exports["progressBars"].startUI(5000, "Müll wird durchsucht...")
@@ -101,26 +106,24 @@ function canSearchTrash () {
 
 // check for trash every 5 seconds
 setInterval(() => {
-  setImmediate(() => {
-    if (!canSearchTrash()) return
+  if (!canSearchTrash()) return
 
-    const object = getNearestTrashObject()
+  const object = getNearestTrashObject()
 
-    // check if object is already searched
-    if (object && searchedObjects.includes(object.id)) return
+  // check if object is already searched
+  if (object && searchedObjects.includes(object.id)) return
 
-    if (object?.id !== activeObject?.id) {
-      ClearAllHelpMessages()
+  if (object?.id !== activeObject?.id) {
+    ClearAllHelpMessages()
 
-      if (object) {
-        BeginTextCommandDisplayHelp('THREESTRINGS')
-        AddTextComponentSubstringPlayerName('Drücke ~INPUT_CONTEXT~ um den Müll zu durchsuchen.')
-        EndTextCommandDisplayHelp(0, false, true, 50000)
-      }
+    if (object) {
+      BeginTextCommandDisplayHelp('THREESTRINGS')
+      AddTextComponentSubstringPlayerName('Drücke ~INPUT_CONTEXT~ um den Müll zu durchsuchen.')
+      EndTextCommandDisplayHelp(0, false, true, 50000)
     }
+  }
 
-    activeObject = object
-  })
+  activeObject = object
 }, 1000)
 
 onNet('lootable-trash:searchTrashResult', (result?: IRandomLoot) => {

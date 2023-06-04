@@ -182,6 +182,6 @@ fivem-js@^1.3.1:
 
 shared@JohnDeved/fivem-shared:
   version "1.0.0"
-  resolved "https://codeload.github.com/JohnDeved/fivem-shared/tar.gz/a9052c088e211fc7cc6aeb97d1406ce70f2f3a78"
+  resolved "https://codeload.github.com/JohnDeved/fivem-shared/tar.gz/75e579df06596d903d2ef459c7f5c3f89c397c98"
   dependencies:
     fivem-esx-js "^0.1.17"

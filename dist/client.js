@@ -66,6 +66,10 @@
     const [x, y] = GetEntityCoords(PlayerPedId(), true);
     const heading = GetHeadingFromVector_2d(obj.pos[0] - x, obj.pos[1] - y);
     SetEntityHeading(PlayerPedId(), heading);
+    try {
+      globalThis.exports.progressBars.startUI(5e3, "M\xFCll wird durchsucht...");
+    } catch (e) {
+    }
     TaskStartScenarioInPlace(PlayerPedId(), "PROP_HUMAN_BUM_BIN", 0, true);
     await sleep(5e3);
     TaskStartScenarioInPlace(PlayerPedId(), "PROP_HUMAN_BUM_BIN", 0, false);
@@ -105,22 +109,20 @@
     return true;
   }
   setInterval(() => {
-    setImmediate(() => {
-      if (!canSearchTrash())
-        return;
-      const object = getNearestTrashObject();
-      if (object && searchedObjects.includes(object.id))
-        return;
-      if (object?.id !== activeObject?.id) {
-        ClearAllHelpMessages();
-        if (object) {
-          BeginTextCommandDisplayHelp("THREESTRINGS");
-          AddTextComponentSubstringPlayerName("Dr\xFCcke ~INPUT_CONTEXT~ um den M\xFCll zu durchsuchen.");
-          EndTextCommandDisplayHelp(0, false, true, 5e4);
-        }
+    if (!canSearchTrash())
+      return;
+    const object = getNearestTrashObject();
+    if (object && searchedObjects.includes(object.id))
+      return;
+    if (object?.id !== activeObject?.id) {
+      ClearAllHelpMessages();
+      if (object) {
+        BeginTextCommandDisplayHelp("THREESTRINGS");
+        AddTextComponentSubstringPlayerName("Dr\xFCcke ~INPUT_CONTEXT~ um den M\xFCll zu durchsuchen.");
+        EndTextCommandDisplayHelp(0, false, true, 5e4);
       }
-      activeObject = object;
-    });
+    }
+    activeObject = object;
   }, 1e3);
   onNet("lootable-trash:searchTrashResult", (result) => {
     if (!result) {
