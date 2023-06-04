@@ -1,6 +1,6 @@
-import { trashObjects } from '../config.json'
+import config from '../config.json'
+import type { IRandomLoot } from '../server/random'
 
-console.log('[lootable-trash] Client Resource Started')
 export type TrashObject = NonNullable<ReturnType<typeof getNearestTrashObject>>
 
 let activeObject: ReturnType<typeof getNearestTrashObject> | undefined
@@ -12,7 +12,7 @@ function getNearestTrashObject () {
   const [x, y, z] = GetEntityCoords(PlayerPedId(), true)
 
   // get first object within 2 meters of player
-  for (const trashObject of trashObjects) {
+  for (const trashObject of config.trashObjects) {
     // GetGanePool('CObject') returns a list of all objects streamed in.
     const id = GetClosestObjectOfType(x, y, z, 1, GetHashKey(trashObject.name), false, false, false)
 
@@ -123,7 +123,7 @@ setInterval(() => {
   })
 }, 1000)
 
-onNet('lootable-trash:searchTrashResult', (result?: string) => {
+onNet('lootable-trash:searchTrashResult', (result?: IRandomLoot) => {
   if (!result) {
     SetNotificationTextEntry('STRING')
     AddTextComponentString('Hier gibt es ~y~nichts~s~ mehr zu finden.')
@@ -132,6 +132,6 @@ onNet('lootable-trash:searchTrashResult', (result?: string) => {
   }
 
   SetNotificationTextEntry('STRING')
-  AddTextComponentString(`Du hast ~g~${result}~s~ gefunden.`)
+  AddTextComponentString(`Du hast ~g~${result.amount}x ${result.name}~s~ gefunden.`)
   DrawNotification(true, false)
 })

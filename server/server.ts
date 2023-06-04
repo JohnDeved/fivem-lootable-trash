@@ -1,4 +1,6 @@
+import { ESX_Server as ESX } from 'shared/exports/esx'
 import type { TrashObject } from '../client/client'
+import { getRandomLoot } from 'random'
 
 console.log('[lootable-trash] Server Resource Started')
 
@@ -12,6 +14,8 @@ function getDistance2d (pos1: number[], pos2: number[]) {
 }
 
 onNet('lootable-trash:searchTrash', (source: number, obj: TrashObject) => {
+  const xPlayer = ESX.GetPlayerFromId(source)
+
   // count how many times trash has been searched in the area
   const count = searchedObjects.filter(pos => getDistance2d(pos, obj.pos) < 100).length
 
@@ -26,6 +30,12 @@ onNet('lootable-trash:searchTrash', (source: number, obj: TrashObject) => {
   // add to searched objects
   searchedObjects.push(obj.pos)
 
+  const item = getRandomLoot(obj.type)
+
+  const isWeapon = item.name.startsWith('weapon_')
+  if (isWeapon) xPlayer.addWeapon(item.name, item.amount)
+  else xPlayer.addInventoryItem(item.name, item.amount)
+
   // respond with result
-  emitNet('lootable-trash:searchTrashResult', source, `result_${count}`)
+  emitNet('lootable-trash:searchTrashResult', source, item)
 })
