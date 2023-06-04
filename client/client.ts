@@ -1,4 +1,4 @@
-import config from '../config.json'
+import { trashObjects } from '../config.json'
 import type { IRandomLoot } from '../server/random'
 
 export type TrashObject = NonNullable<ReturnType<typeof getNearestTrashObject>>
@@ -12,7 +12,7 @@ function getNearestTrashObject () {
   const [x, y, z] = GetEntityCoords(PlayerPedId(), true)
 
   // get first object within 2 meters of player
-  for (const trashObject of config.trashObjects) {
+  for (const trashObject of trashObjects) {
     // GetGanePool('CObject') returns a list of all objects streamed in.
     const id = GetClosestObjectOfType(x, y, z, 1, GetHashKey(trashObject.name), false, false, false)
 

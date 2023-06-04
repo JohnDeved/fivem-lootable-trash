@@ -1,7 +1,7 @@
-import config from '../config.json'
+import { loot as configLoot } from '../config.json'
 
 export type IRandomLoot = ReturnType<typeof getRandomLoot>
-export function getRandomLoot (containerType: number, loot = config.loot) {
+export function getRandomLoot (containerType: number, loot = configLoot) {
   const items = loot.filter(item => item.types.includes(containerType))
 
   const totalWeight = items.reduce((sum, item) => sum + item.weight, 0)
