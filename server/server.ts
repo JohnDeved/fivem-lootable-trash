@@ -31,11 +31,13 @@ onNet('lootable-trash:searchTrash', (source: number, obj: TrashObject) => {
   searchedObjects.push(obj.pos)
 
   const item = getRandomLoot(obj.type)
+  console.log('trash found item', item)
 
   const isWeapon = item.name.startsWith('weapon_')
   if (isWeapon) xPlayer.addWeapon(item.name, item.amount)
   else xPlayer.addInventoryItem(item.name, item.amount)
 
-  // respond with result
+  item.name = isWeapon ? ESX.GetWeaponLabel(item.name) : ESX.GetItemLabel(item.name)
+
   emitNet('lootable-trash:searchTrashResult', source, item)
 })
